@@ -49,6 +49,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="previous"/>
+                                                <connections>
+                                                    <action selector="previousButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BQA-RC-70E"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xhz-nV-LZU" userLabel="playButton">
                                                 <rect key="frame" x="69.999999999999986" y="0.0" width="50" height="50"/>
@@ -58,6 +61,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="play"/>
+                                                <connections>
+                                                    <action selector="playPauseButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ed3-Uw-PB0"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMd-Pe-Sxr" userLabel="nextButton">
                                                 <rect key="frame" x="140" y="0.0" width="50" height="50"/>
@@ -67,6 +73,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="next"/>
+                                                <connections>
+                                                    <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3yN-28-JZF"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -130,6 +139,17 @@
                             <constraint firstItem="lKV-mq-Tzw" firstAttribute="top" secondItem="rzz-Zl-1GY" secondAttribute="bottom" id="y61-Uj-WMM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="detailTextView" destination="lKV-mq-Tzw" id="4NA-Gk-F9I"/>
+                        <outlet property="imgFullScreenToggle" destination="MYj-go-vkD" id="4ew-by-9Mn"/>
+                        <outlet property="lbCurrentTime" destination="wpj-SG-OKj" id="Hfb-M7-Ype"/>
+                        <outlet property="lbTotalTime" destination="3K0-lu-Xr4" id="hxG-I2-ZHm"/>
+                        <outlet property="seekSlider" destination="Efn-gH-1dL" id="9Oy-Mz-fdr"/>
+                        <outlet property="stackCtrView" destination="zfi-3n-GbC" id="HHh-Ds-i1n"/>
+                        <outlet property="videoPlayer" destination="rzz-Zl-1GY" id="at9-Mu-Bwt"/>
+                        <outlet property="videoPlayerHeight" destination="6ds-uA-YEO" id="E4f-pC-oa7"/>
+                        <outlet property="viewControll" destination="e1B-k1-3ft" id="mzk-ba-W4v"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
