@@ -51,6 +51,9 @@ class ViewController: UIViewController {
         // Call a method to make buttons circular
         makeButtonsCircular()
         
+        // Set up navigation bar
+        setupNavigationBar()
+        
         // Do any additional setup after loading the view.
         videoViewModel.fetchVideos {
             self.updateUI()
@@ -79,14 +82,27 @@ class ViewController: UIViewController {
         onTapPlayPause()
     }
     
+    
     // MARK: - UI Setup and Update Methods
+    private func setupNavigationBar() {
+        // Customize the title's attributes
+        let fontAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Chalkduster", size: 24.0) ?? UIFont.systemFont(ofSize: 24.0),
+            .foregroundColor: UIColor.black // Set the desired text color
+        ]
+        self.navigationController?.navigationBar.titleTextAttributes = fontAttributes
+    }
     
     func updateUI() {
         guard videoViewModel.videos.indices.contains(currentVideoIndex) else { return }
         
         let currentVideo = videoViewModel.videos[currentVideoIndex]
         self.videoURL = currentVideo.fullURL
-        self.detailTextView.text = currentVideo.description
+        
+        // Display title, author, and description in the detailTextView
+        let detailsText = "Title: \(currentVideo.title)\n\nAuthor: \(currentVideo.author.name)\n\nDescription: \(currentVideo.description)"
+        self.detailTextView.text = detailsText
+        
         self.setVideoPlayer()
         self.scribingAndPositioning(show: false)
     }
@@ -252,6 +268,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - Additional Methods
     
     @objc private func onTap10SecNext() {
         guard let currentTime = self.player?.currentTime() else { return }
