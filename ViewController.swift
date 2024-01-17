@@ -42,30 +42,63 @@ class ViewController: UIViewController {
     private var playerLayer : AVPlayerLayer? = nil
     var videoURL = String()
     private var timeObserver : Any? = nil
+    private let videoViewModel = VideoViewModel()
+
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Call a method to make buttons circular
+        makeButtonsCircular()
+        
         // Do any additional setup after loading the view.
+        videoViewModel.fetchVideos {
+            self.updateUI()
+        }
     }
     
     // MARK: - IBActions
     
     @IBAction private func nextButtonTapped(_ sender: UIButton) {
         // Implement next video functionality
+        guard currentVideoIndex < videoViewModel.videos.count - 1 else { return }
+        currentVideoIndex += 1
+        updateUI()
        
     }
     
     @IBAction private func previousButtonTapped(_ sender: UIButton) {
         // Implement previous video functionality
+        guard currentVideoIndex > 0 else { return }
+        currentVideoIndex -= 1
+        updateUI()
     }
     
-    @IBAction func playPauseButtonTapped(_ sender: Any) {
+    @IBAction func playPauseButtonTapped(_ sender: UIButton) {
         // Implement play/pause video functionality
+        onTapPlayPause()
     }
-    
     
     // MARK: - UI Setup and Update Methods
+    
+    func updateUI() {
+        guard videoViewModel.videos.indices.contains(currentVideoIndex) else { return }
+        
+        let currentVideo = videoViewModel.videos[currentVideoIndex]
+        self.videoURL = currentVideo.fullURL
+        self.detailTextView.text = currentVideo.description
+        self.setVideoPlayer()
+        self.scribingAndPositioning(show: false)
+    }
+    
+    private func makeButtonsCircular() {
+        // Loop through the arranged subviews of stackCtrView
+        for case let button as UIButton in stackCtrView.arrangedSubviews {
+            // Set corner radius to make the button circular
+            button.layer.cornerRadius = button.frame.size.width / 2
+            button.clipsToBounds = true
+        }
+    }
     
     private func setVideoPlayer() {
         guard let url = URL(string: videoURL) else { return }
